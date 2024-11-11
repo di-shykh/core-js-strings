@@ -283,7 +283,9 @@ function orderAlphabetically(str) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(str, substring) {}
+function containsSubstring(str, substring) {
+  return str.includes(substring);
+}
 
 /**
  * Returns the number of vowels in the string.
@@ -299,8 +301,14 @@ function containsSubstring(str, substring) {}
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels( /* str */ ) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  let count = 0;
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+  str.toLocaleLowerCase.split('').forEach(item => {
+    if (vowels.includes(item)) count += 1;
+    return;
+  });
+  return count;
 }
 
 /**
@@ -316,8 +324,22 @@ function countVowels( /* str */ ) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome( /* str */ ) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let strToArr = str.toLocaleLowerCase().split('');
+  const specSymbols = ['~', ',', '"', "'", '/', '|', '`', ':'];
+  let strToArrFiltered = strToArr.filter(item => {
+    if (!specSymbols.includes(item)) return item;
+  });
+  const numOfSteps = Math.floor(str.length / 2);
+  let isPalindrom = false;
+  for (let i = 0; i < numOfSteps; i += 1) {
+    if (str[i] === str[str.length - 1 - i]) isPalindrom = true;
+    else {
+      isPalindrom = false;
+      break;
+    }
+  }
+  return isPalindrom;
 }
 
 /**
@@ -332,8 +354,13 @@ function isPalindrome( /* str */ ) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord( /* sentence */ ) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  let longestWord = '';
+  sentence.split(' ').forEach(item => {
+    if (item.length >= longestWord.length)
+      longestWord = item;
+  })
+  return longestWord;
 }
 
 /**
@@ -346,8 +373,8 @@ function findLongestWord( /* sentence */ ) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords( /* str */ ) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  return str.split(' ').forEach(item => item.split('').reverse().join('')).join(' ');
 }
 
 /**
@@ -361,8 +388,12 @@ function reverseWords( /* str */ ) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase( /* str */ ) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  return str.split('').forEach(item => {
+    if (item == item.toLowerCase())
+      item.toUpperCase();
+    else item.toLowerCase();
+  }).join('');
 }
 
 /**
