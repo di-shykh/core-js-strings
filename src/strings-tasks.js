@@ -20,7 +20,8 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
-  return value.length;
+  if (value) return value.length;
+  return 0;
 }
 
 /**
@@ -38,7 +39,8 @@ function getStringLength(value) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  return typeof value === 'string';
+  if (typeof value === 'string' || value instanceof String) return true;
+  return false;
 }
 
 /**
@@ -69,7 +71,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  return value.at(0);
+  return value.at(0) || '';
 }
 
 /**
@@ -99,7 +101,13 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   removeLeadingWhitespaces('\t\t\tHello, World! ') => 'Hello, World! '
  */
 function removeLeadingWhitespaces(value) {
-  return value[0] === ' ' ? value.slice(1, value.length) : value;
+  let i = 0;
+  let str = value;
+  while ((str[i] === ' ' || str[i] === '\t') && i < value.length) {
+    str = str.slice(i + 1, str.length);
+    i += 1;
+  }
+  return str;
 }
 
 /**
@@ -114,6 +122,13 @@ function removeLeadingWhitespaces(value) {
  *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
  */
 function removeTrailingWhitespaces(value) {
+  /* let i = value.length;
+  let str = value.split('');
+   while ((str[i] === ' ' || str[i] === '\t') && i >= 0) {
+     str = str.slice(0, i - 2);
+     i -= 1;
+   }
+   return str; */
   return value[value.length - 1] === ' ' ? value.slice(0, -1) : value;
 }
 
@@ -131,7 +146,8 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  return str.repeat(times);
+  if (times > 0) return str.repeat(times);
+  return '';
 }
 
 /**
