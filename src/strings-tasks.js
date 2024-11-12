@@ -115,7 +115,6 @@ function removeLeadingWhitespaces(value) {
  */
 function removeTrailingWhitespaces(value) {
   return value[value.length - 1] === ' ' ? value.slice(0, -1) : value;
-
 }
 
 /**
@@ -182,11 +181,11 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes() => 0
  */
 function sumOfCodes(str) {
-  let sumOfCodes = 0;
-  for (let i = 0; i < str.length; i++) {
-    sumOfCodes += str.charCodeAt(i);
+  let sum = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sum += str.charCodeAt(i);
   }
-  return sumOfCodes;
+  return sum;
 }
 
 /**
@@ -304,9 +303,8 @@ function containsSubstring(str, substring) {
 function countVowels(str) {
   let count = 0;
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
-  str.toLocaleLowerCase.split('').forEach(item => {
+  str.toLocaleLowerCase.split('').forEach((item) => {
     if (vowels.includes(item)) count += 1;
-    return;
   });
   return count;
 }
@@ -325,15 +323,17 @@ function countVowels(str) {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
-  let strToArr = str.toLocaleLowerCase().split('');
+  const strToArr = str.toLocaleLowerCase().split('');
   const specSymbols = ['~', ',', '"', "'", '/', '|', '`', ':'];
-  let strToArrFiltered = strToArr.filter(item => {
+  const strToArrFiltered = strToArr.filter((item) => {
     if (!specSymbols.includes(item)) return item;
+    return '';
   });
   const numOfSteps = Math.floor(str.length / 2);
   let isPalindrom = false;
   for (let i = 0; i < numOfSteps; i += 1) {
-    if (str[i] === str[str.length - 1 - i]) isPalindrom = true;
+    if (strToArrFiltered[i] === strToArrFiltered[str.length - 1 - i])
+      isPalindrom = true;
     else {
       isPalindrom = false;
       break;
@@ -356,10 +356,9 @@ function isPalindrome(str) {
  */
 function findLongestWord(sentence) {
   let longestWord = '';
-  sentence.split(' ').forEach(item => {
-    if (item.length >= longestWord.length)
-      longestWord = item;
-  })
+  sentence.split(' ').forEach((item) => {
+    if (item.length >= longestWord.length) longestWord = item;
+  });
   return longestWord;
 }
 
@@ -374,7 +373,10 @@ function findLongestWord(sentence) {
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
 function reverseWords(str) {
-  return str.split(' ').forEach(item => item.split('').reverse().join('')).join(' ');
+  return str
+    .split(' ')
+    .forEach((item) => item.split('').reverse().join(''))
+    .join(' ');
 }
 
 /**
@@ -389,11 +391,13 @@ function reverseWords(str) {
  *   invertCase('12345') => '12345'
  */
 function invertCase(str) {
-  return str.split('').forEach(item => {
-    if (item == item.toLowerCase())
-      item.toUpperCase();
-    else item.toLowerCase();
-  }).join('');
+  return str
+    .split('')
+    .forEach((item) => {
+      if (item === item.toLowerCase()) item.toUpperCase();
+      else item.toLowerCase();
+    })
+    .join('');
 }
 
 /**
@@ -480,11 +484,13 @@ function extractEmails(str) {
  */
 function encodeToRot13(str) {
   const alphabetStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  const rot13AlphabetStr = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
-  let tempArr = str.split('');
-  let newArr = tempArr.map(item => {
-    if (alphabetStr.indexOf(item) !== -1) return rot13AlphabetStr[alphabetStr.indexOf(item)];
-    else return item;
+  const rot13AlphabetStr =
+    'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  const tempArr = str.split('');
+  const newArr = tempArr.map((item) => {
+    if (alphabetStr.indexOf(item) !== -1)
+      return rot13AlphabetStr[alphabetStr.indexOf(item)];
+    return item;
   });
   return newArr.join('');
 }
@@ -514,11 +520,59 @@ function encodeToRot13(str) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  let arrayOfCards = [
-    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
-    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
-    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
-    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'
+  const arrayOfCards = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
   ];
   return arrayOfCards.indexOf(value);
 }
